@@ -12,24 +12,22 @@ services:
       - /usr:/host/usr:ro
       - /etc:/host/etc:ro
       - ./falco.yaml:/etc/falco/falco.yaml
+      # You can set the below options to load rules
       # - ./falco_rules.yaml:/etc/falco/falco_rules.yaml
       # - ./falco_rules.local.yaml:/etc/falco/rules.d/custom-rules.yaml
   falcosidekick:
     depends_on: [falco]
     image: falcosecurity/falcosidekick:2.28.0
     container_name: falcosidekick
-    ports:
-      - 2801:2801
     environment:
       - WEBUI_URL=http://falcosidekick-ui:2802
+    # You can set falcosidekick configuration here
     # volumes:
     #   - ./falcosidekick.yaml:/etc/falco/falcosidekick.yaml
     # command: "-c /etc/falco/falcosidekick.yaml"
   redis:
     image: redislabs/redisearch:2.2.4
     container_name: redis
-    ports:
-      - 6379:6379
   falcosidekick-ui:
     depends_on: [falcosidekick, redis]
     container_name: falcosidekick-ui

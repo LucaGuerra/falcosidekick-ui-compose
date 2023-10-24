@@ -184,6 +184,8 @@ rules_file:
 # For example, if you want to use the `k8saudit` plugin,
 # ensure it is configured appropriately and then change this to: 
 # load_plugins: [k8saudit, json]
+# for okta, you will:
+# load_plugins: [okta, json]
 load_plugins: []
 
 # Customize subsettings for each enabled plugin. These settings will only be
@@ -203,6 +205,15 @@ plugins:
     # https://github.com/falcosecurity/plugins/blob/master/plugins/cloudtrail/README.md
   - name: json
     library_path: libjson.so
+
+# Add your okta details below
+#  - name: okta
+#    library_path: libokta.so
+#    init_config:
+#      organization: xxxxx # as in https://xxxxx.okta.com , without https or okta.com
+#      api_token: yyyyy # your Okta API token (see https://developer.okta.com/docs/guides/create-an-api-token/main/)
+#    open_params: ''
+
 
 
 ######################
